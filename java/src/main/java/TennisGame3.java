@@ -14,7 +14,8 @@ public class TennisGame3 implements TennisGame {
         if (player1.hasScoredLessThan(4) && player2.hasScoredLessThan(4) && !scoredPointsAre(6)) {
             String[] p = new String[]{"Love", "Fifteen", "Thirty", "Forty"}; 
             var player1Score = p[player1.getNumberOfScoredPoints()];
-            return player1.hasScoredTheSameNumberOfPointsAs(player2) ? player1Score + "-All" : player1Score + "-" + p[player2.getNumberOfScoredPoints()];
+            var player2Score = p[player2.getNumberOfScoredPoints()];
+            return printScore(player1Score, player2Score);
         } else {
             if (player1.hasScoredTheSameNumberOfPointsAs(player2))
                 return "Deuce";
@@ -22,6 +23,10 @@ public class TennisGame3 implements TennisGame {
             var diff = player1MinusPlayer2Points();
             return ((diff * diff) == 1) ? ("Advantage " + leaderName) : ("Win for " + leaderName);
         }
+    }
+
+    private static String printScore(String player1Score, String player2Score) {
+        return Objects.equals(player1Score, player2Score) ? player1Score + "-All" : player1Score + "-" + player2Score;
     }
 
     private int player1MinusPlayer2Points() {
