@@ -12,7 +12,7 @@ public class TennisGame3 implements TennisGame {
 
     public String getScore() {
         String s;
-        if (player1.hasScoredLessThan(4) && player2.hasScoredLessThan(4) && !theTwoPlayersHasScored(6)) {
+        if (player1.hasScoredLessThan(4) && player2.hasScoredLessThan(4) && !scoredPointsAre(6)) {
             String[] p = new String[]{"Love", "Fifteen", "Thirty", "Forty"}; 
             s = p[player1.getNumberOfScoredPoints()];
             return player1.hasScoredTheSameNumberOfPointsAs(player2) ? s + "-All" : s + "-" + p[player2.getNumberOfScoredPoints()];
@@ -24,7 +24,7 @@ public class TennisGame3 implements TennisGame {
         }
     }
 
-    private boolean theTwoPlayersHasScored(int points) {
+    private boolean scoredPointsAre(int points) {
         return player1.getNumberOfScoredPoints() + player2.getNumberOfScoredPoints() == points;
     }
 
