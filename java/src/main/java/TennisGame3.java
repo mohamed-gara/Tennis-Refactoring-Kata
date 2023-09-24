@@ -11,7 +11,7 @@ public class TennisGame3 implements TennisGame {
     }
 
     public String getScore() {
-        if (player1.hasScoredLessThan(4) && player2.hasScoredLessThan(4) && !scoredPointsAre(6)) {
+        if (eachPlayerScoredLessThan(4) && !scoredPointsAre(6)) {
             return printScore(player1.getScore(), player2.getScore());
         } else {
           return switch (diffBetweenTheTwoPlayers()) {
@@ -21,6 +21,10 @@ public class TennisGame3 implements TennisGame {
             default -> throw new IllegalStateException();
           };
         }
+    }
+
+    private boolean eachPlayerScoredLessThan(int points) {
+        return player1.hasScoredLessThan(points) && player2.hasScoredLessThan(points);
     }
 
     private String getLeaderName() {
