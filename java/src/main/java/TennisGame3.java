@@ -3,7 +3,7 @@ import java.util.Objects;
 public class TennisGame3 implements TennisGame {
 
     private final Player player1 = new Player();
-    private final Player2 player2 = new Player2();
+    private final Player player2 = new Player();
 
     public TennisGame3(String player1Name, String player2Name) {
         this.player1.setName(player1Name);
@@ -34,27 +34,6 @@ public class TennisGame3 implements TennisGame {
 
     public static class Player {
 
-        private String name;
-        private int numberOfScoredPoints;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public int getNumberOfScoredPoints() {
-            return numberOfScoredPoints;
-        }
-
-        public void setNumberOfScoredPoints(int numberOfScoredPoints) {
-            this.numberOfScoredPoints = numberOfScoredPoints;
-        }
-    }
-
-    public static class Player2 {
         private String name;
         private int numberOfScoredPoints;
 
