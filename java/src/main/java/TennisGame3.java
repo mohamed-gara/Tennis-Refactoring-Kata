@@ -16,10 +16,13 @@ public class TennisGame3 implements TennisGame {
         } else {
             if (player1.hasScoredTheSameNumberOfPointsAs(player2))
                 return "Deuce";
-            var leaderName = player1.hasScoredMoreThan(player2) ? player1.getName() : player2.getName();
             var diff = player1MinusPlayer2Points();
-            return ((diff * diff) == 1) ? ("Advantage " + leaderName) : ("Win for " + leaderName);
+            return ((diff * diff) == 1) ? ("Advantage " + getLeaderName()) : ("Win for " + getLeaderName());
         }
+    }
+
+    private String getLeaderName() {
+        return player1.hasScoredMoreThan(player2) ? player1.getName() : player2.getName();
     }
 
     private static String printScore(String player1Score, String player2Score) {
