@@ -12,7 +12,7 @@ public class TennisGame3 implements TennisGame {
 
     public String getScore() {
         String s;
-        if (player1.getNumberOfScoredPoints() < 4 && player2.getNumberOfScoredPoints() < 4 && !(player1.getNumberOfScoredPoints() + player2.getNumberOfScoredPoints() == 6)) {
+        if (player1.hasScoredLessThan(4) && player2.hasScoredLessThan(4) && !(player1.getNumberOfScoredPoints() + player2.getNumberOfScoredPoints() == 6)) {
             String[] p = new String[]{"Love", "Fifteen", "Thirty", "Forty"}; 
             s = p[player1.getNumberOfScoredPoints()];
             return (player1.getNumberOfScoredPoints() == player2.getNumberOfScoredPoints()) ? s + "-All" : s + "-" + p[player2.getNumberOfScoredPoints()];
@@ -23,7 +23,7 @@ public class TennisGame3 implements TennisGame {
             return ((player1.getNumberOfScoredPoints() - player2.getNumberOfScoredPoints())*(player1.getNumberOfScoredPoints() - player2.getNumberOfScoredPoints()) == 1) ? "Advantage " + s : "Win for " + s;
         }
     }
-    
+
     public void wonPoint(String playerName) {
         if (Objects.equals(playerName, player1.getName())) {
             this.player1.scoredPoint();
@@ -51,6 +51,10 @@ public class TennisGame3 implements TennisGame {
 
         private void scoredPoint() {
             this.numberOfScoredPoints = numberOfScoredPoints + 1;
+        }
+
+        private boolean hasScoredLessThan(int points) {
+            return numberOfScoredPoints < points;
         }
     }
 }
