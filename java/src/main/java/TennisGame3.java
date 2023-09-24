@@ -26,10 +26,14 @@ public class TennisGame3 implements TennisGame {
     
     public void wonPoint(String playerName) {
         if (Objects.equals(playerName, player1.getName())) {
-            this.player1.setNumberOfScoredPoints(this.player1.getNumberOfScoredPoints() + 1);
+            scoredPoint(this.player1);
         } else {
-            this.player2.setNumberOfScoredPoints(this.player2.getNumberOfScoredPoints() + 1);
+            scoredPoint(this.player2);
         }
+    }
+
+    private void scoredPoint(Player player) {
+        player.setNumberOfScoredPoints(player.getNumberOfScoredPoints() + 1);
     }
 
     public static class Player {
