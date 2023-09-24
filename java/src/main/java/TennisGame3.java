@@ -20,8 +20,13 @@ public class TennisGame3 implements TennisGame {
             if (player1.hasScoredTheSameNumberOfPointsAs(player2))
                 return "Deuce";
             s = player1.hasScoredMoreThan(player2) ? player1.getName() : player2.getName();
-            return ((player1.getNumberOfScoredPoints() - player2.getNumberOfScoredPoints())*(player1.getNumberOfScoredPoints() - player2.getNumberOfScoredPoints()) == 1) ? "Advantage " + s : "Win for " + s;
+            var diff = player1MinusPlayer2Points();
+            return ((diff * diff) == 1) ? ("Advantage " + s) : ("Win for " + s);
         }
+    }
+
+    private int player1MinusPlayer2Points() {
+        return player1.getNumberOfScoredPoints() - player2.getNumberOfScoredPoints();
     }
 
     private boolean scoredPointsAre(int points) {
