@@ -78,10 +78,6 @@ public class TennisGame3 implements TennisGame {
             return numberOfScoredPoints < points;
         }
 
-        private boolean hasScoredTheSameNumberOfPointsAs(Player player2) {
-            return numberOfScoredPoints == player2.numberOfScoredPoints;
-        }
-
         private boolean hasScoredMoreThan(Player player2) {
             return numberOfScoredPoints > player2.numberOfScoredPoints;
         }
