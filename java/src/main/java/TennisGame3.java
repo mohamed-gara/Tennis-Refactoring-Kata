@@ -15,17 +15,13 @@ public class TennisGame3 implements TennisGame {
         if (player1.hasScoredLessThan(4) && player2.hasScoredLessThan(4) && !(player1.getNumberOfScoredPoints() + player2.getNumberOfScoredPoints() == 6)) {
             String[] p = new String[]{"Love", "Fifteen", "Thirty", "Forty"}; 
             s = p[player1.getNumberOfScoredPoints()];
-            return hasScoredTheSameNumberOfPoints(player1, player2) ? s + "-All" : s + "-" + p[player2.getNumberOfScoredPoints()];
+            return player1.hasScoredTheSameNumberOfPointsAs(player2) ? s + "-All" : s + "-" + p[player2.getNumberOfScoredPoints()];
         } else {
-            if (hasScoredTheSameNumberOfPoints(player1, player2))
+            if (player1.hasScoredTheSameNumberOfPointsAs(player2))
                 return "Deuce";
             s = player1.getNumberOfScoredPoints() > player2.getNumberOfScoredPoints() ? player1.getName() : player2.getName();
             return ((player1.getNumberOfScoredPoints() - player2.getNumberOfScoredPoints())*(player1.getNumberOfScoredPoints() - player2.getNumberOfScoredPoints()) == 1) ? "Advantage " + s : "Win for " + s;
         }
-    }
-
-    private boolean hasScoredTheSameNumberOfPoints(Player player1, Player player2) {
-        return player1.getNumberOfScoredPoints() == player2.getNumberOfScoredPoints();
     }
 
     public void wonPoint(String playerName) {
@@ -59,6 +55,10 @@ public class TennisGame3 implements TennisGame {
 
         private boolean hasScoredLessThan(int points) {
             return numberOfScoredPoints < points;
+        }
+
+        private boolean hasScoredTheSameNumberOfPointsAs(Player player2) {
+            return numberOfScoredPoints == player2.numberOfScoredPoints;
         }
     }
 }
