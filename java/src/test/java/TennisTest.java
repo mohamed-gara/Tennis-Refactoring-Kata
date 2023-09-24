@@ -1,5 +1,7 @@
 import org.junit.jupiter.params.ParameterizedTest;
 
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -51,14 +53,16 @@ public class TennisTest {
     }
 
     private static void checkAllScores(int player1Points, int player2Points, String expectedScore, TennisGame game) {
-        int highestScore = Math.max(player1Points, player2Points);
-        for (int i = 0; i < highestScore; i++) {
-            if (i < player1Points)
-                game.wonPoint("player1");
-            if (i < player2Points)
-                game.wonPoint("player2");
-        }
+
+        applyPlayerPoints(game, "player1", player1Points);
+        applyPlayerPoints(game, "player2", player2Points);
+
         assertEquals(expectedScore, game.getScore());
+    }
+
+    private static void applyPlayerPoints(TennisGame game, String player, int points) {
+        IntStream.range(0, points)
+          .forEach(__ -> game.wonPoint(player));
     }
 
     @ParameterizedTest
