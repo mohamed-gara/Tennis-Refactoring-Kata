@@ -14,10 +14,12 @@ public class TennisGame3 implements TennisGame {
         if (player1.hasScoredLessThan(4) && player2.hasScoredLessThan(4) && !scoredPointsAre(6)) {
             return printScore(player1.getScore(), player2.getScore());
         } else {
-            if (player1.hasScoredTheSameNumberOfPointsAs(player2))
-                return "Deuce";
-            var diff = player1MinusPlayer2Points();
-            return ((diff * diff) == 1) ? ("Advantage " + getLeaderName()) : ("Win for " + getLeaderName());
+          return switch (diffBetweenTheTwoPlayers()) {
+            case 0 -> "Deuce";
+            case 1 -> "Advantage " + getLeaderName();
+            case 2 -> "Win for " + getLeaderName();
+            default -> throw new IllegalStateException();
+          };
         }
     }
 
@@ -29,8 +31,8 @@ public class TennisGame3 implements TennisGame {
         return Objects.equals(player1Score, player2Score) ? player1Score + "-All" : player1Score + "-" + player2Score;
     }
 
-    private int player1MinusPlayer2Points() {
-        return player1.getNumberOfScoredPoints() - player2.getNumberOfScoredPoints();
+    private int diffBetweenTheTwoPlayers() {
+        return Math.abs(player1.getNumberOfScoredPoints() - player2.getNumberOfScoredPoints());
     }
 
     private boolean scoredPointsAre(int points) {
