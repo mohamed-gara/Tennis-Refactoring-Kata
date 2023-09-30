@@ -15,21 +15,24 @@ public class TennisGame6 implements TennisGame {
       player1Score++;
     else
       player2Score++;
-
   }
 
   public String getScore() {
-    String result;
-
-    if (player1Score == player2Score) {
-      result = tieScore();
-    } else if (player1Score >= 4 || player2Score >= 4) {
-      result = endGameScore();
+    if (isTie()) {
+      return tieScore();
+    } else if (isEndGame()) {
+      return endGameScore();
     } else {
-      result = regularScore();
+      return regularScore();
     }
+  }
 
-    return result;
+  private boolean isEndGame() {
+    return player1Score >= 4 || player2Score >= 4;
+  }
+
+  private boolean isTie() {
+    return player1Score == player2Score;
   }
 
   private String endGameScore() {
