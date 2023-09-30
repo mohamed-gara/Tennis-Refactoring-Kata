@@ -56,28 +56,22 @@ public class TennisGame6 implements TennisGame {
 
       result = endGameScore;
     } else {
-      // regular score
-      String regularScore;
-
-      String score1 = switch (player1Score) {
-        case 0 -> "Love";
-        case 1 -> "Fifteen";
-        case 2 -> "Thirty";
-        default -> "Forty";
-      };
-
-      var score2 = switch (player2Score) {
-        case 0 -> "Love";
-        case 1 -> "Fifteen";
-        case 2 -> "Thirty";
-        default -> "Forty";
-      };
-
-      regularScore = score1 + "-" + score2;
-
-      result = regularScore;
+      result = regularScore();
     }
 
     return result;
+  }
+
+  private String regularScore() {
+    return scoreOf(player1Score) + "-" + scoreOf(player2Score);
+  }
+
+  private String scoreOf(int player1Score) {
+    return switch (player1Score) {
+      case 0 -> "Love";
+      case 1 -> "Fifteen";
+      case 2 -> "Thirty";
+      default -> "Forty";
+    };
   }
 }
