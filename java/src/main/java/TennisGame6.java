@@ -24,25 +24,24 @@ public class TennisGame6 implements TennisGame {
     if (player1Score == player2Score) {
       result = tieScore();
     } else if (player1Score >= 4 || player2Score >= 4) {
-      // end-game score
-      String endGameScore;
-
-      if (player1Score - player2Score == 1) {
-        endGameScore = "Advantage " + player1Name;
-      } else if (player1Score - player2Score == -1) {
-        endGameScore = "Advantage " + player2Name;
-      } else if (player1Score - player2Score >= 2) {
-        endGameScore = "Win for " + player1Name;
-      } else {
-        endGameScore = "Win for " + player2Name;
-      }
-
-      result = endGameScore;
+      result = endGameScore();
     } else {
       result = regularScore();
     }
 
     return result;
+  }
+
+  private String endGameScore() {
+    if (player1Score - player2Score == 1) {
+      return "Advantage " + player1Name;
+    } else if (player1Score - player2Score == -1) {
+      return "Advantage " + player2Name;
+    } else if (player1Score - player2Score >= 2) {
+      return "Win for " + player1Name;
+    } else {
+      return "Win for " + player2Name;
+    }
   }
 
   private String tieScore() {
