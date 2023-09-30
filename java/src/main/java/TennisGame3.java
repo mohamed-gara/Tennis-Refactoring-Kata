@@ -13,14 +13,14 @@ public class TennisGame3 implements TennisGame {
     public String getScore() {
         if (atLeastOnePlayerHasMoreThan(3) && diffBetweenTheTwoPlayers() > 1) {
             return "Win for " + getLeaderName();
-        } else if (eachPlayerScoredLessThan(4) && !scoredPointsAre(6)) {
-            return printScore(player1.getScore(), player2.getScore());
+        } else if (eachPlayerScoredMoreThan(2)) {
+            return switch (diffBetweenTheTwoPlayers()) {
+                case 0 -> "Deuce";
+                case 1 -> "Advantage " + getLeaderName();
+                default -> throw new IllegalStateException();
+            };
         } else {
-          return switch (diffBetweenTheTwoPlayers()) {
-            case 0 -> "Deuce";
-            case 1 -> "Advantage " + getLeaderName();
-            default -> throw new IllegalStateException();
-          };
+            return printScore(player1.getScore(), player2.getScore());
         }
     }
 
@@ -28,8 +28,8 @@ public class TennisGame3 implements TennisGame {
         return player1.hasScoredMoreThan(3) || player2.hasScoredMoreThan(3);
     }
 
-    private boolean eachPlayerScoredLessThan(int points) {
-        return player1.hasScoredLessThan(points) && player2.hasScoredLessThan(points);
+    private boolean eachPlayerScoredMoreThan(int points) {
+        return player1.hasScoredMoreThan(points) && player2.hasScoredMoreThan(points);
     }
 
     private String getLeaderName() {
@@ -42,10 +42,6 @@ public class TennisGame3 implements TennisGame {
 
     private int diffBetweenTheTwoPlayers() {
         return Math.abs(player1.getNumberOfScoredPoints() - player2.getNumberOfScoredPoints());
-    }
-
-    private boolean scoredPointsAre(int points) {
-        return player1.getNumberOfScoredPoints() + player2.getNumberOfScoredPoints() == points;
     }
 
     public void wonPoint(String playerName) {
@@ -77,10 +73,6 @@ public class TennisGame3 implements TennisGame {
 
         private void scoredPoint() {
             this.numberOfScoredPoints = numberOfScoredPoints + 1;
-        }
-
-        private boolean hasScoredLessThan(int points) {
-            return numberOfScoredPoints < points;
         }
 
         private boolean hasScoredMoreThan(Player player2) {
