@@ -11,16 +11,21 @@ public class TennisGame3 implements TennisGame {
     }
 
     public String getScore() {
-        if (eachPlayerScoredLessThan(4) && !scoredPointsAre(6)) {
+        if (atLeastOnePlayerHasMoreThan(3) && diffBetweenTheTwoPlayers() > 1) {
+            return "Win for " + getLeaderName();
+        } else if (eachPlayerScoredLessThan(4) && !scoredPointsAre(6)) {
             return printScore(player1.getScore(), player2.getScore());
         } else {
           return switch (diffBetweenTheTwoPlayers()) {
             case 0 -> "Deuce";
             case 1 -> "Advantage " + getLeaderName();
-            case 2 -> "Win for " + getLeaderName();
             default -> throw new IllegalStateException();
           };
         }
+    }
+
+    private boolean atLeastOnePlayerHasMoreThan(int points) {
+        return player1.hasScoredMoreThan(3) || player2.hasScoredMoreThan(3);
     }
 
     private boolean eachPlayerScoredLessThan(int points) {
@@ -84,6 +89,10 @@ public class TennisGame3 implements TennisGame {
 
         private String getScore() {
             return SCORE[numberOfScoredPoints];
+        }
+
+        public boolean hasScoredMoreThan(int points) {
+            return points < this.numberOfScoredPoints;
         }
     }
 }
