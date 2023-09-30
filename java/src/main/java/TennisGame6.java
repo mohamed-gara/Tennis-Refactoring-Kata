@@ -27,12 +27,21 @@ public class TennisGame6 implements TennisGame {
     }
   }
 
-  private boolean isEndGame() {
-    return player1Score >= 4 || player2Score >= 4;
-  }
-
   private boolean isTie() {
     return player1Score == player2Score;
+  }
+
+  private String tieScore() {
+    return switch (player1Score) {
+      case 0 -> "Love-All";
+      case 1 -> "Fifteen-All";
+      case 2 -> "Thirty-All";
+      default -> "Deuce";
+    };
+  }
+
+  private boolean isEndGame() {
+    return player1Score >= 4 || player2Score >= 4;
   }
 
   private String endGameScore() {
@@ -45,15 +54,6 @@ public class TennisGame6 implements TennisGame {
     } else {
       return "Win for " + player2Name;
     }
-  }
-
-  private String tieScore() {
-    return switch (player1Score) {
-      case 0 -> "Love-All";
-      case 1 -> "Fifteen-All";
-      case 2 -> "Thirty-All";
-      default -> "Deuce";
-    };
   }
 
   private String regularScore() {
