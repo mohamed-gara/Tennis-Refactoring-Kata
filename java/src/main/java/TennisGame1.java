@@ -54,28 +54,16 @@ public class TennisGame1 implements TennisGame {
   }
 
   private String beforeDeuceScore() {
-    String score = "";
-    int currentPlayerPoints;
-    for (int playerId = 1; playerId < 3; playerId++) {
-      if (playerId == 1) {
-        currentPlayerPoints = player1ScoredPoints;
-      } else {
-        score += "-";
-        currentPlayerPoints = player2ScoredPoints;
-      }
-
-      score += playerScore(currentPlayerPoints);
-    }
-    return score;
+    return playerScore(player1ScoredPoints) + "-" + playerScore(player2ScoredPoints);
   }
 
-  private static String playerScore(int currentPlayerPoints) {
-    return switch (currentPlayerPoints) {
+  private static String playerScore(int playerPoints) {
+    return switch (playerPoints) {
       case 0 -> "Love";
       case 1 -> "Fifteen";
       case 2 -> "Thirty";
       case 3 -> "Forty";
-      default -> throw new IllegalStateException("Unexpected value: " + currentPlayerPoints);
+      default -> throw new IllegalStateException("Unexpected value: " + playerPoints);
     };
   }
 }
