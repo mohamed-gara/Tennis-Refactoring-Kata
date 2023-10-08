@@ -55,16 +55,16 @@ public class TennisGame1 implements TennisGame {
 
   private String beforeDeuceScore() {
     String score = "";
-    int tempScore;
-    for (int i = 1; i < 3; i++) {
-      if (i == 1) {
-        tempScore = player1ScoredPoints;
+    int currentPlayerPoints;
+    for (int playerId = 1; playerId < 3; playerId++) {
+      if (playerId == 1) {
+        currentPlayerPoints = player1ScoredPoints;
       } else {
         score += "-";
-        tempScore = player2ScoredPoints;
+        currentPlayerPoints = player2ScoredPoints;
       }
 
-      switch (tempScore) {
+      switch (currentPlayerPoints) {
         case 0:
           score += "Love";
           break;
