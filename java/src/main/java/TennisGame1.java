@@ -33,34 +33,20 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String equalsScore() {
-        String score;
-        switch (player1ScoredPoints)
-        {
-            case 0:
-                score = "Love-All";
-                break;
-            case 1:
-                score = "Fifteen-All";
-                break;
-            case 2:
-                score = "Thirty-All";
-                break;
-            default:
-                score = "Deuce";
-                break;
-
-        }
-        return score;
+        return switch (player1ScoredPoints) {
+          case 0 -> "Love-All";
+          case 1 -> "Fifteen-All";
+          case 2 -> "Thirty-All";
+          default -> "Deuce";
+        };
     }
 
     private String tryToWinTwoConsecutivePointsScore() {
-        String score;
-        int minusResult = player1ScoredPoints - player2ScoredPoints;
-        if (minusResult==1) score ="Advantage player1";
-        else if (minusResult ==-1) score ="Advantage player2";
-        else if (minusResult>=2) score = "Win for player1";
-        else score ="Win for player2";
-        return score;
+        int difference = player1ScoredPoints - player2ScoredPoints;
+        if (difference == 1) return "Advantage player1";
+        else if (difference == -1) return "Advantage player2";
+        else if (difference >= 2) return "Win for player1";
+        else return "Win for player2";
     }
 
     private boolean scoreIsOrWasDeuce() {
@@ -72,8 +58,12 @@ public class TennisGame1 implements TennisGame {
         int tempScore;
         for (int i = 1; i<3; i++)
         {
-            if (i==1) tempScore = player1ScoredPoints;
-            else { score +="-"; tempScore = player2ScoredPoints;}
+            if (i==1) {
+                tempScore = player1ScoredPoints;
+            } else {
+                score +="-"; tempScore = player2ScoredPoints;
+            }
+
             switch(tempScore)
             {
                 case 0:
