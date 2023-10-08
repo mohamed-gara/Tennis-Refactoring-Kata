@@ -64,21 +64,18 @@ public class TennisGame1 implements TennisGame {
         currentPlayerPoints = player2ScoredPoints;
       }
 
-      switch (currentPlayerPoints) {
-        case 0:
-          score += "Love";
-          break;
-        case 1:
-          score += "Fifteen";
-          break;
-        case 2:
-          score += "Thirty";
-          break;
-        case 3:
-          score += "Forty";
-          break;
-      }
+      score += playerScore(currentPlayerPoints);
     }
     return score;
+  }
+
+  private static String playerScore(int currentPlayerPoints) {
+    return switch (currentPlayerPoints) {
+      case 0 -> "Love";
+      case 1 -> "Fifteen";
+      case 2 -> "Thirty";
+      case 3 -> "Forty";
+      default -> throw new IllegalStateException("Unexpected value: " + currentPlayerPoints);
+    };
   }
 }
